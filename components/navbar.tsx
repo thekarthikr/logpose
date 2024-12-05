@@ -41,9 +41,13 @@ const navLinks = [
 export default function Navbar() {
   return (
     <div className="fixed bottom-3 w-full items-center">
-      <Dock magnification={70} distance={100} className="max-h-14 gap-5">
+      <Dock
+        magnification={70}
+        distance={100}
+        className="max-h-14 gap-5 bg-neutral-100 backdrop-blur-md dark:bg-neutral-950/40"
+      >
         {navLinks.map(({ title, link, icon }) => (
-          <DockIcon>
+          <DockIcon key={title}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
