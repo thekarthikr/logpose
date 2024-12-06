@@ -70,3 +70,11 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.block {
+  @apply h-12 w-12 border border-neutral-100 transition-colors duration-300 dark:border-neutral-900;
+}
+
+.highlight {
+  @apply border-primary/35 dark:border-primary/20;
+}
