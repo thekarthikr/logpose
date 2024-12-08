@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 
 const Hero = () => {
@@ -21,7 +20,7 @@ const Hero = () => {
           },
         },
       }}
-      className="relative mx-auto mt-12 flex max-w-4xl items-center justify-center"
+      className="pointer-events-none relative mx-auto mt-12 flex max-w-4xl flex-col items-center justify-center"
     >
       <div className="z-10 inline-block space-y-8">
         <motion.h1 variants={FadeUp} className="text-4xl md:text-7xl">

@@ -1,88 +1,79 @@
 "use client";
+import React, { useEffect, useRef, useState } from "react";
 
-import React, { useEffect, useRef } from "react";
-
-export const MouseMoveCanvas = () => {
+const MouseMoveCanvas = () => {
   const blockContainerRef = useRef<HTMLDivElement | null>(null);
+  const [numBlocks, setNumBlocks] = useState(0);
+  const blockSize = 50;
 
   useEffect(() => {
-    const blockContainer = blockContainerRef.current;
-    const blockSize = 50;
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
     const numCols = Math.ceil(screenWidth / blockSize);
     const numRows = Math.ceil(screenHeight / blockSize);
-    const numBlocks = numCols * numRows;
-
-    function createBlocks() {
-      if (blockContainer) {
-        for (let i = 0; i < numBlocks; i++) {
-          const block = document.createElement("div");
-          block.classList.add("block");
-          block.dataset.index = i.toString();
-          block.addEventListener("mousemove", highlightRandomNeighbors);
-          blockContainer.appendChild(block);
-        }
-      }
-    }
-
-    function highlightRandomNeighbors(this: HTMLElement) {
-      const index = parseInt(this.dataset.index || "0");
-      const neighbors = [
-        index - 1,
-        index + 1,
-        index - numCols,
-        index + numCols,
-        index - numCols - 1,
-        index - numCols + 1,
-        index + numCols - 1,
-        index + numCols + 1,
-      ].filter(
-        (i) =>
-          i >= 0 &&
-          i < numBlocks &&
-          Math.abs((i % numCols) - (index % numCols)) <= 1,
-      );
-
-      this.classList.add("highlight");
-      setTimeout(() => {
-        this.classList.remove("highlight");
-      }, 500);
-
-      shuffleArray(neighbors)
-        .slice(0, 1)
-        .forEach((nIndex) => {
-          const neighbor = blockContainer?.children[nIndex] as HTMLElement;
-          if (neighbor) {
-            neighbor.classList.add("highlight");
-            setTimeout(() => {
-              neighbor.classList.remove("highlight");
-            }, 500);
-          }
-        });
-    }
-
-    function shuffleArray(array: number[]): number[] {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    createBlocks();
+    setNumBlocks(numCols * numRows);
   }, []);
 
+  const highlightRandomNeighbors = (index: number) => {
+    const blockContainer = blockContainerRef.current!;
+    const numCols = Math.ceil(window.innerWidth / blockSize);
+
+    const neighbors = [
+      index - 1,
+      index + 1,
+      index - numCols,
+      index + numCols,
+      index - numCols - 1,
+      index - numCols + 1,
+      index + numCols - 1,
+      index + numCols + 1,
+    ].filter(
+      (i) =>
+        i >= 0 &&
+        i < numBlocks &&
+        Math.abs((i % numCols) - (index % numCols)) <= 1,
+    );
+
+    const block = blockContainer.children[index] as HTMLDivElement;
+    block.classList.add("highlight");
+
+    setTimeout(() => {
+      block.classList.remove("highlight");
+    }, 500);
+
+    const randomNeighborIndex =
+      neighbors[Math.floor(Math.random() * neighbors.length)];
+    const neighborBlock = blockContainer.children[
+      randomNeighborIndex
+    ] as HTMLDivElement;
+    if (neighborBlock) {
+      neighborBlock.classList.add("highlight");
+      setTimeout(() => {
+        neighborBlock.classList.remove("highlight");
+      }, 500);
+    }
+  };
+
   return (
-    <div className="fixed inset-0 h-screen w-[107vw]">
+    <div className="fixed inset-0 h-full w-full">
       <div
-        ref={blockContainerRef}
         id="blocks"
-        className="absolute left-0 top-0 flex h-full w-full flex-wrap"
-      ></div>
+        ref={blockContainerRef}
+        className="flex h-[100vh] w-[105vw] flex-wrap overflow-hidden"
+      >
+        {Array.from({ length: numBlocks }).map((_, i) => (
+          <div
+            key={i}
+            className="h-[50px] w-[50px] border transition-colors duration-300 ease-in-out"
+            onMouseMove={() => highlightRandomNeighbors(i)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
+
+export default MouseMoveCanvas;
 
 // This component was inspired by a tutorial created by Codegrid on Youtube.
 // You can find the tutorial here: https://www.youtube.com/watch?v=oqTpc76-TtQ
