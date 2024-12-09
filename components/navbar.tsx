@@ -40,7 +40,7 @@ const navLinks = [
 
 export default function Navbar() {
   return (
-    <div className="fixed bottom-3 w-full items-center">
+    <div className="fixed bottom-3 z-50 w-full items-center">
       <Dock
         magnification={70}
         distance={100}
