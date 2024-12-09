@@ -24,7 +24,7 @@ const Hero = () => {
     >
       <div className="z-10 inline-block space-y-8">
         <motion.h1 variants={FadeUp} className="text-4xl md:text-7xl">
-          Hi, I'm Karthik, <br /> A frontend Developer
+          Hi, I&apos;m Karthik, <br /> A frontend Developer
         </motion.h1>
         <motion.p
           variants={FadeUp}
