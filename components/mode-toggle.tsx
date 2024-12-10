@@ -8,7 +8,7 @@ export function ModeToggle() {
   return (
     <button
       type="button"
-      className="rounded-full bg-black/20 p-3 dark:bg-white/10"
+      className="rounded-full bg-black/5 p-3 dark:bg-white/5"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       <Icons.moon className="h-[1.2rem] w-[1.2rem] text-neutral-800 dark:hidden dark:text-neutral-200" />

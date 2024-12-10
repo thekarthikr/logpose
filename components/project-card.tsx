@@ -25,13 +25,13 @@ export function ProjectCard(project: Project) {
         style={{
           borderRadius: "4px",
         }}
-        className="z-20 border bg-neutral-900/20 p-3 backdrop-blur-md"
+        className="z-20 border bg-secondary/10 p-3 backdrop-blur-md"
       >
-        <div className="flex items-center space-x-3 p-3">
+        <div className="flex flex-col items-center space-y-3 p-3 sm:flex-row sm:space-x-3">
           <MorphingDialogImage
             src={project.bannerImage}
             alt={project.summary}
-            className="h-48 w-48 rounded-md object-cover object-top"
+            className="h-48 w-full rounded-md object-cover object-top sm:w-48"
           />
           <div className="flex flex-col items-start justify-center space-y-0">
             <MorphingDialogTitle className="text-lg font-medium text-foreground sm:text-xs md:text-xl">
@@ -56,7 +56,7 @@ export function ProjectCard(project: Project) {
           style={{
             borderRadius: "12px",
           }}
-          className="relative h-auto w-[500px] border bg-neutral-900"
+          className="relative h-auto w-[500px] border bg-card"
         >
           <ScrollArea className="h-[90vh]" type="scroll">
             <div className="relative p-6">

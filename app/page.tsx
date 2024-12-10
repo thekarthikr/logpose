@@ -5,7 +5,7 @@ import Stacks from "@/components/stack";
 
 export default function Home() {
   return (
-    <div className="relative">
+    <div className="relative px-4 md:px-0">
       <Hero />
       <Stacks />
       <Projects />

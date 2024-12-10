@@ -44,7 +44,7 @@ export default function Navbar() {
       <Dock
         magnification={70}
         distance={100}
-        className="max-h-14 gap-5 bg-neutral-100 backdrop-blur-md dark:bg-neutral-950/40"
+        className="max-h-14 gap-5 bg-neutral-100 backdrop-blur-md dark:bg-neutral-950/60"
       >
         {navLinks.map(({ title, link, icon }) => (
           <DockIcon key={title}>
@@ -52,7 +52,7 @@ export default function Navbar() {
               <TooltipTrigger asChild>
                 <Link
                   href={link}
-                  className="rounded-full bg-black/10 p-3 dark:bg-white/10"
+                  className="rounded-full bg-black/5 p-3 dark:bg-white/5"
                   target={link.startsWith("https") ? "_blank" : "_self"}
                 >
                   {icon}
