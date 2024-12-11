@@ -1,7 +1,12 @@
+import { Metadata } from "next";
 import { allPosts } from "@/.content-collections/generated";
 import Blog from "@/components/blog-list";
 
-import React from "react";
+export const metadata: Metadata = {
+  title: "Blog | Logpose",
+  description:
+    "Explore the latest posts and creative insights on the Logpose blog.",
+};
 
 const BlogListPage = () => {
   return (
